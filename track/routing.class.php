@@ -1,6 +1,6 @@
 <?php
 
-require("Medoo.php");
+require_once("Medoo.php");
 use Medoo\Medoo;
 /**
  *
@@ -25,9 +25,9 @@ class Routing
   }
 
 
-  function get_page_from_code($code)
+  function get_url_from_code($code)
   {
-      $url = $this->db->select('landing_pages','url',['code' =>$code]);
+      $url = $this->db->get('landing_pages','url',['code' =>$code]);
 
       return $url;
   }

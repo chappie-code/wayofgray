@@ -1,6 +1,7 @@
 <?php
 
-require("Medoo.php");
+require_once("Medoo.php");
+require_once("routing.class.php");
 use Medoo\Medoo;
 /**
  *
@@ -28,14 +29,14 @@ class Track
   {
 
 
-    $data['session_id'] = session_id();
-    $data['source'] = $data['utm_source'];
-    $data['campaign'] = $data['utm_campaign'];
+    $record_data['session_id'] = session_id();
+    $record_data['source'] = $data['utm_source'];
+    $record_data['campaign'] = $data['utm_campaign'];
 
-    unset($data['utm_source']);
-    unset($data['utm_campaign']);
+    //unset($data['utm_source']);
+    //unset($data['utm_campaign']);
 
-    $record = $this->get_record_if_exists($data,'visit');
+    $record = $this->get_record_if_exists($record_data,'visit');
     $visit_id = 0;
 
     if($record > 0)
@@ -64,7 +65,7 @@ class Track
 
     if($type == 'visit')
     {
-      $row_id = $this->db->select('visit_data','id',$data);
+      $row_id = $this->db->max('visit_data','id',$data);
     }
 
     return $row_id;
