@@ -9,7 +9,7 @@ require_once('routing.class.php');
 
 
 $track = new Track();
-$rout = new Routing();
+$route = new Routing();
 
 //$data = clean_data($_SERVER['QUERY_STRING']);
 $data = parse_url($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
@@ -28,7 +28,10 @@ $_SESSION['visit_id'] = $visit;
 setcookie('visit_id',$visit, time()+60*60*24*30);
 
 
-$url = $rout->get_url_from_code($lp);
+$url = $route->get_url_from_code($lp);
+$url .= "?visit_id=" . $visit;
+
+
 
 /* This will give an error. Note the output
  * above, which is before the header() call */

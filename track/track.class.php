@@ -31,7 +31,7 @@ class Track
 
     $record_data['session_id'] = session_id();
     $record_data['source'] = $data['utm_source'];
-    $record_data['campaign'] = $data['utm_campaign'];
+    //$record_data['campaign'] = $data['utm_campaign'];
 
     //unset($data['utm_source']);
     //unset($data['utm_campaign']);
@@ -44,7 +44,7 @@ class Track
       $visit_id = $record;
     }
     else {
-      $this->db->insert('visit_data',$data);
+      $this->db->insert('visit_data',$record_data);
 
       $visit_id = $this->db->id();
     }
